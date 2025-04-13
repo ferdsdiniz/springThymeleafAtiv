@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Página Inicial</title>
     <meta charset="UTF-8">
@@ -18,100 +19,65 @@
             color: #333;
         }
 
-        table {
-            width: 80%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        /* Basic Navbar Styling */
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
         }
 
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
         }
 
-        th {
-            background-color: #5cb85c;
-            color: white;
-            font-weight: bold;
+        .navbar li {
+            float: left;
         }
 
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        a.button {
-            display: inline-block;
-            background-color: #5cb85c;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 4px;
-            text-decoration: none;
-            margin-top: 20px;
-        }
-
-        a.button:hover {
-            background-color: #4cae4c;
-        }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 50%;
-            margin: auto;
-        }
-
-        label {
+        .navbar li a {
             display: block;
-            margin-bottom: 8px;
-            color: #333;
-        }
-
-        input[type="text"],
-        input[type="number"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #5cb85c;
             color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
         }
 
-        button:hover {
-            background-color: #4cae4c;
+        .navbar li a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Basic Container Styling */
+        .container {
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
-<h1>Bem-vindo à Biblioteca</h1>
 
-<a th:href="@{/livros}">Gerenciar Livros</a><br/>
-<a th:href="@{/usuarios}">Gerenciar Usuários</a><br/>
-<a th:href="@{/emprestimos}">Gerenciar Empréstimos</a><br/>
-<a th:href="@{/reservas}">Gerenciar Reservas</a><br/>
-<a th:href="@{/relatorios}">Gerar Relatórios</a><br/>
+<nav class="navbar">
+    <ul>
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/livros}">Livros</a></li>
+        <li><a th:href="@{/usuarios}">Usuários</a></li>
+        <li><a th:href="@{/emprestimos}">Empréstimos</a></li>
+        <li><a th:href="@{/reservas}">Reservas</a></li>
+        <li><a th:href="@{/relatorios}">Relatórios</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h1>Bem-vindo à Biblioteca</h1>
+    <!-- Content of your home page -->
+</div>
+
 </body>
 </html>
