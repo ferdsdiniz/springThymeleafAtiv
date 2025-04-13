@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Livros</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #5cb85c;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        a.button {
+            display: inline-block;
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        a.button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+<h1>Lista de Livros</h1>
+<a th:href="@{/livros/novo}" class="button">Adicionar Novo Livro</a>
+<a th:href="@{/}">Página Inicial</a><br/>
+<a th:href="@{/usuarios}">Gerenciar Usuários</a><br/>
+<a th:href="@{/emprestimos}">Gerenciar Empréstimos</a><br/>
+<a th:href="@{/reservas}">Gerenciar Reservas</a><br/>
+<a th:href="@{/relatorios}">Gerar Relatórios</a>
+<table>
+    <thead>
+    <tr>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>ISBN</th>
+        <th>Ano</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="livro : ${livros}">
+        <td th:text="${livro.titulo}"></td>
+        <td th:text="${livro.autor}"></td>
+        <td th:text="${livro.isbn}"></td>
+        <td th:text="${livro.anoPublicacao}"></td>
+        <td>
+            <a th:href="@{/livros/editar/{id}(id=${livro.id})}">Editar</a>
+            <a th:href="@{/livros/deletar/{id}(id=${livro.id})}">Deletar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulário de Livro</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+<h1>Formulário de Livro</h1>
+<form th:action="@{/livros/salvar}" th:object="${livros}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" th:field="*{titulo}" required="required"/><br/>
+
+    <label for="autor">Autor:</label>
+    <input type="text" id="autor" th:field="*{autor}" required="required"/><br/>
+
+    <label for="isbn">ISBN:</label>
+    <input type="text" id="isbn" th:field="*{isbn}" required="required"/><br/>
+
+    <label for="anoPublicacao">Ano de Publicação:</label>
+    <input type="number" id="anoPublicacao" th:field="*{anoPublicacao}" /><br/>
+
+    <button type="submit">Salvar</button>
+</form>
+<a th:href="@{/livros}">Voltar para a Lista</a>
+<a th:href="@{/}">Página Inicial</a><br/>
+<a th:href="@{/usuarios}">Gerenciar Usuários</a><br/>
+<a th:href="@{/emprestimos}">Gerenciar Empréstimos</a><br/>
+<a th:href="@{/reservas}">Gerenciar Reservas</a><br/>
+<a th:href="@{/relatorios}">Gerar Relatórios</a>
+</body>
+</html>

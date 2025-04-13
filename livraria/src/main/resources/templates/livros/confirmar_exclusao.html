@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Confirmar Exclusão</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        a.button {
+            display: inline-block;
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        a.button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+<h1>Confirmar Exclusão</h1>
+
+<p>Tem certeza que deseja excluir o livro "<span th:text="${livro.titulo}"></span>"?</p>
+
+<a th:href="@{/livros/deletar/{id}(id=${livro.id})}" class="button">Sim, Excluir</a>
+<a th:href="@{/livros}">Cancelar</a>
+<a th:href="@{/}">Página Inicial</a><br/>
+<a th:href="@{/usuarios}">Gerenciar Usuários</a><br/>
+<a th:href="@{/emprestimos}">Gerenciar Empréstimos</a><br/>
+<a th:href="@{/reservas}">Gerenciar Reservas</a><br/>
+<a th:href="@{/relatorios}">Gerar Relatórios</a>
+</body>
+</html>

@@ -1,0 +1,7 @@
+com\livraria\livros\Controller\LivrosRestController.class
+com\livraria\livros\service\LivrosService.class
+com\livraria\livros\SecurityConfig.class
+com\livraria\livros\entity\Livros.class
+com\livraria\livros\Controller\LivrosWebController.class
+com\livraria\livros\LivrariaApplication.class
+com\livraria\livros\repository\LivrosRepository.class
