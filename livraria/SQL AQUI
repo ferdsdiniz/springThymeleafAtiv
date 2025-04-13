@@ -1,0 +1,78 @@
+CREATE TABLE livros (
+    id SERIAL PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    autor VARCHAR(255) NOT NULL,
+    isbn VARCHAR(20) UNIQUE NOT NULL,
+    ano_publicacao INTEGER,
+    editora VARCHAR(100),
+    categoria VARCHAR(100),
+    quantidade_disponivel INTEGER DEFAULT 0,
+    localizacao VARCHAR(50),
+    data_cadastro DATE DEFAULT CURRENT_DATE
+);
+
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    telefone VARCHAR(20),
+    endereco TEXT,
+    tipo_usuario VARCHAR(20) NOT NULL DEFAULT 'MEMBRO', -- MEMBRO, BIBLIOTECARIO, ADMIN
+    data_cadastro DATE DEFAULT CURRENT_DATE,
+    status BOOLEAN DEFAULT TRUE
+);
+
+CREATE TABLE emprestimos (
+    id SERIAL PRIMARY KEY,
+    livro_id INTEGER REFERENCES livros(id),
+    usuario_id INTEGER REFERENCES usuarios(id),
+    data_emprestimo DATE DEFAULT CURRENT_DATE,
+    data_devolucao_prevista DATE NOT NULL,
+    data_devolucao_efetiva DATE,
+    status VARCHAR(20) DEFAULT 'ATIVO', -- ATIVO, DEVOLVIDO, ATRASADO
+    observacoes TEXT
+);
+
+CREATE TABLE reservas (
+    id SERIAL PRIMARY KEY,
+    livro_id INTEGER REFERENCES livros(id),
+    usuario_id INTEGER REFERENCES usuarios(id),
+    data_reserva DATE DEFAULT CURRENT_DATE,
+    data_validade DATE,
+    status VARCHAR(20) DEFAULT 'PENDENTE' -- PENDENTE, CONCLUIDA, CANCELADA
+);
+
+CREATE TABLE autores (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    biografia TEXT,
+    data_nascimento DATE
+);
+
+CREATE TABLE livro_autor (
+    livro_id INTEGER REFERENCES livros(id),
+    autor_id INTEGER REFERENCES autores(id),
+    PRIMARY KEY (livro_id, autor_id)
+);
+
+CREATE TABLE categorias (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL UNIQUE,
+    descricao TEXT
+);
+
+CREATE TABLE livro_categoria (
+    livro_id INTEGER REFERENCES livros(id),
+    categoria_id INTEGER REFERENCES categorias(id),
+    PRIMARY KEY (livro_id, categoria_id)
+);
+
+CREATE TABLE multas (
+    id SERIAL PRIMARY KEY,
+    emprestimo_id INTEGER REFERENCES emprestimos(id),
+    valor DECIMAL(10,2) NOT NULL,
+    status VARCHAR(20) DEFAULT 'PENDENTE', -- PENDENTE, PAGA
+    data_geracao DATE DEFAULT CURRENT_DATE,
+    data_pagamento DATE
+);
